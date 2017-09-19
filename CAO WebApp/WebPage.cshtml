@@ -1,0 +1,99 @@
+﻿@{
+    var results = "";
+    var subjects = new string[6];
+    var subjectPoints = new int[6];
+    var subjectGrades = new string[6];
+    var pointsDic = new Dictionary<string, int>();
+
+
+    if (IsPost)
+    {
+        subjects[0] = Request.Form["Subject 1"];
+        subjectGrades[0] = Request.Form["Grade 1"];
+
+        subjects[1] = Request.Form["Subject 2"];
+        subjectGrades[1] = Request.Form["Grade 2"];
+
+        subjects[2] = Request.Form["Subject 3"];
+        subjectGrades[2] = Request.Form["Grade 3"];
+
+        subjects[3] = Request.Form["Subject 4"];
+        subjectGrades[3] = Request.Form["Grade 4"];
+
+        subjects[4] = Request.Form["Subject 5"];
+        subjectGrades[4] = Request.Form["Grade 5"];
+
+        subjects[5] = Request.Form["Subject 6"];
+        subjectGrades[5] = Request.Form["Grade 6"];
+
+        var reader = new StreamReader(File.OpenRead(Server.MapPath("~/grades.csv")));
+        while (!reader.EndOfStream)
+        {
+            var line = reader.ReadLine();
+            var values = line.Split(',');
+            pointsDic.Add(values[0], Convert.ToInt32(values[1]));
+        }
+
+        subjectPoints[0] = pointsDic[subjectGrades[0]];
+        subjectPoints[1] = pointsDic[subjectGrades[1]];
+        subjectPoints[2] = pointsDic[subjectGrades[2]];
+        subjectPoints[3] = pointsDic[subjectGrades[3]];
+        subjectPoints[4] = pointsDic[subjectGrades[4]];
+        subjectPoints[5] = pointsDic[subjectGrades[5]];
+
+        var totalPoints = subjectPoints.Sum();
+        results = string.Format("Your total points add up to {0}", totalPoints);
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CAO Points Calculator</title>
+    <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
+</head>
+<body>
+    <form method="post">
+        <fieldset>
+            <div class="entry">
+                <label for="Sub 1">Subject 1</label>
+                <input type="text" id="Sub 1" name="Subject 1" />
+                <label for="Grd 1">Grade 1</label>
+                <input type="text" id="Grd 1" name="Grade 1" />
+            </div>
+            <div class="entry">
+                <label for="Sub 2">Subject 2</label>
+                <input type="text" id="Sub 2" name="Subject 2" />
+                <label for="Grd 2">Grade 2</label>
+                <input type="text" id="Grd 2" name="Grade 2" />
+            </div>
+            <div class="entry">
+                <label for="Sub 3">Subject 3</label>
+                <input type="text" id="Sub 3" name="Subject 3" />
+                <label for="Grd 3">Grade 3</label>
+                <input type="text" id="Grd 3" name="Grade 3" />
+            </div>
+            <div class="entry">
+                <label for="Sub 4">Subject 4</label>
+                <input type="text" id="Sub 4" name="Subject 4" />
+                <label for="Grd 4">Grade 4</label>
+                <input type="text" id="Grd 4" name="Grade 4" />
+            </div>
+            <div class="entry">
+                <label for="Sub 5">Subject 5</label>
+                <input type="text" id="Sub 5" name="Subject 5" />
+                <label for="Grd 5">Grade 5</label>
+                <input type="text" id="Grd 5" name="Grade 5" />
+            </div>
+            <div class="entry">
+                <label for="Sub 6">Subject 6</label>
+                <input type="text" id="Sub 6" name="Subject 6" />
+                <label for="Grd 6">Grade 6</label>
+                <input type="text" id="Grd 6" name="Grade 6" />
+            </div>
+            <button type="submit">Calculate</button>
+        </fieldset>
+    </form>
+    <p>@results</p>
+</body>
+</html>
