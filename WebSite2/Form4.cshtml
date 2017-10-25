@@ -1,0 +1,26 @@
+﻿@{
+    Validation.Add("dob",Validator.DateTime("Enter a valid date, you idiot"));
+    Validation.Add("url",Validator.Url("Enter a valid url"));
+
+    if (IsPost)
+    {
+        Validation.IsValid();
+    }
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form4</title>
+    </head>
+    <body>
+    <form method="post">
+        <label for="dob">Date of Birth</label><input type="text" id="dob" name="dob"/>
+        <label for="url">URL</label><input type="text" id="url" name="url"/>
+        <button type="submit">Validate</button>
+        @Html.ValidationMessage("dob")
+        @Html.ValidationMessage("url")
+
+    </form>
+    </body>
+</html>

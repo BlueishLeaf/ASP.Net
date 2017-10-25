@@ -1,0 +1,34 @@
+﻿@using System.ServiceModel.Channels
+@{
+    Validation.Add("number1",Validator.Required("You must enter a number"));
+    Validation.Add("number2",Validator.Required("You must enter a number"));
+    Validation.Add("number1",Validator.Integer("You must enter a whole number"));
+    Validation.Add("number2",Validator.Integer("You must enter a whole number"));
+
+    string message=null;
+    if (IsPost)
+    {
+        if (Validation.IsValid())
+        {
+            message = (Request.Form["number1"].AsInt() + Request.Form["number2"].AsInt()).ToString();
+        }
+    }
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form 2</title>
+    </head>
+    <body>
+    <form method="post">
+        <label for="number1"></label><input type="text" name="number1" id="number1"/>
+        <label for="number2"></label><input type="text" name="number2" id="number2"/>
+        <button type="submit">Add Numbers</button>
+        @Html.ValidationMessage("number1")
+        @Html.ValidationMessage("number2")
+
+        <p>@message</p>
+    </form>
+    </body>
+</html>
