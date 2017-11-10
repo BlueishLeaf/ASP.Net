@@ -1,0 +1,30 @@
+﻿body {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:larger
+}
+
+form {
+    margin: 0 auto;
+    width: 600px;
+    
+}
+
+div {
+    margin:1em;
+    margin-left:5em;
+}
+
+.grade{
+    width:2.5em;
+    text-align:center;
+}
+
+button {
+    margin: 0 auto;
+    font-size:larger;
+    width:100%;
+}
+
+#displayResult{
+    margin-left:45%;
+}

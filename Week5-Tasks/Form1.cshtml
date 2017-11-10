@@ -1,0 +1,26 @@
+﻿@{
+    //S00170465
+    Validation.Add("studentId",Validator.Regex(@"S00\d\d\d\d\d\d", "Enter a valid student id"));
+    //Validation.Add("studentId",Validator.Regex());
+    //Validation.Add("studentId", Validator.Regex());
+
+    if (IsPost)
+    {
+        Validation.IsValid();
+    }
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form1</title>
+    </head>
+    <body>
+    <form method="post">
+        <label for="studentId">Student ID</label><input type="text" id="studentId" name="studentId"/>@Html.ValidationMessage("studentId")<br/>
+        <label for="carReg">Car Registration</label><input type="text" id="carReg" name="carReg"/>@Html.ValidationMessage("carReg")<br />
+        <label for="mobile">Irish Phone</label><input type="text" id="mobile" name="mobile"/>@Html.ValidationMessage("mobile")<br />
+        <button type="submit">Validate</button>
+    </form>
+    </body>
+</html>
